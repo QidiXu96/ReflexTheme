@@ -19,7 +19,7 @@ def parse_ids(fp: str):
         return None, None
     return m.group(1), m.group(2) # transcript id, chunk id
 
-# clean all raw json coding output files 
+# clean all raw json/md coding output files 
 def clean_chunk_round_outputs(coding_base_dir, agents, transcript_id, round_number):
     # coding_base_dir: independent_coding
     for agent in agents:
@@ -30,12 +30,12 @@ def clean_chunk_round_outputs(coding_base_dir, agents, transcript_id, round_numb
             if not f.endswith("_clean.json")
         ]
         if json_files:
-            process_multiple_json_files(json_files) # output is each cleaned round_chunk_transcript file
+            process_multiple_json_files(json_files) # in evaluation.py, output is each cleaned round_chunk_transcript file
         else:
             print(f"[{agent}] No JSON files to clean (round {round_number}).")
 
 # merge all cleaned coding output files for one transcript and one round, across all agents.
-def merge_chunk_round_outputs(coding_base_dir, final_coding_base_dir, agents, transcript_id, round_number):
+def merge_chunk_round_outputs(coding_base_dir, agents, transcript_id, round_number):
     for agent in agents:
         try:
             merge_agent_results(
@@ -43,9 +43,9 @@ def merge_chunk_round_outputs(coding_base_dir, final_coding_base_dir, agents, tr
                 transcript_id=transcript_id,
                 round_num=round_number,
                 base_dir=coding_base_dir,
-                output_base_dir=final_coding_base_dir,
                 suffix="_final"
             ) 
+            print(f"Merged: {agent} | transcript {transcript_id} | round {round_number}")
         except FileNotFoundError as e:
             print(f"Skipped merge: {agent} | {e}")
 
