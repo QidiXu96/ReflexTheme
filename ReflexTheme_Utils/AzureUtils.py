@@ -5,32 +5,18 @@ Description: Contains utility functions for interacting with the Azure OpenAI AP
 from openai import AzureOpenAI
 from docx import Document
 
-def create_client(azure_endpoint, api_key, api_version):
-    """
-    Create an Azure OpenAI client.
-    Parameters:
-        azure_endpoint (str): Your Azure endpoint URL.
-        api_key (str): Your API key.
-        api_version (str): The API version to use.
-    Return Azure OpenAI client
-    """
-    return AzureOpenAI(
+_client = None
+def init_client(azure_endpoint, api_key, api_version):
+    global _client
+    _client = AzureOpenAI(
         azure_endpoint=azure_endpoint,
         api_key=api_key,
         api_version=api_version
     )
 
 def get_completion(client, model, messages, max_tokens=16384, temperature=0.7, top_p=1, frequency_penalty=0, presence_penalty=0):
-    """
-    Get a chat completion from Azure OpenAI.
-
-    Parameters:
-        client (AzureOpenAI): Initialized Azure OpenAI client.
-        model (str): Azure deployment/model name.
-
-    Returns:
-        ChatCompletion: Raw Azure OpenAI response.
-    """
+    if _client is None:
+        raise Exception("AzureOpenAI client not initialized. Please call init_client() with your parameters first.")
     response = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -40,7 +26,6 @@ def get_completion(client, model, messages, max_tokens=16384, temperature=0.7, t
         frequency_penalty=frequency_penalty,
         presence_penalty=presence_penalty
     )
-
     return response
 
 def read_docx(file_path):
