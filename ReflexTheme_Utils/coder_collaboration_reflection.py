@@ -1,5 +1,5 @@
-import os, json, re
-from backend.AzureUtils import get_completion
+import os, json, re, time
+from AzureUtils import get_completion
 
 """
 all chunks coded → one *_final.json per agent/transcript/round
@@ -7,6 +7,7 @@ all chunks coded → one *_final.json per agent/transcript/round
 → update each agent’s reflexive thinking
 → save a versioned updated reflection
 """
+REFLECTION_OUTPUT_BASE_DIR = ("/home/ReflexCoTI/Covid/updated_reflections")
 
 def agent_self_reflection_update(fixed_profile, my_codes, peer_codes, current_reflection):
    if isinstance(current_reflection, dict):
@@ -89,93 +90,65 @@ def agent_self_reflection_update(fixed_profile, my_codes, peer_codes, current_re
 
    return messages
 
-def _parse_json_object(text):
-    value = str(text or "").strip()
-
-    # remove markdown fences if present
-    value = value.replace("```json", "").replace("```", "").strip()
-
-    # first try normal JSON parsing
-    try:
-        parsed = json.loads(value)
-    except json.JSONDecodeError:
-        # fallback: extract the first {...} block
-        start = value.find("{")
-        end = value.rfind("}")
-
-        if start < 0 or end <= start:
-            raise
-
-        json_text = value[start:end + 1]
-
-        # fix invalid backslash escapes such as \'
-        json_text = re.sub(
-            r'\\(?!["\\/bfnrtu])',
-            r'\\\\',
-            json_text
-        )
-
-        parsed = json.loads(json_text)
-
-    if not isinstance(parsed, dict):
-        raise ValueError("Reflection response is not a JSON object.")
-
-    return parsed
-
-def run_reflection_update(client, model, target_agent, fixed_profile, current_reflection, coding_results, agents):
+def run_reflection_update(target_agent, fixed_profile, transcript_id, round_num, base_path, agents):
    peer_agents = [a for a in agents if a != target_agent]
 
-   if target_agent not in coding_results:
-      raise ValueError(f"No coding results found for agent '{target_agent}'.")
-   my_codes = coding_results[target_agent]
+   target_file = os.path.join(base_path, target_agent, f"{transcript_id}_round_{round_num}_final.json") # all chunks of a transcript for a agent in a round
+    
+   if not os.path.exists(target_file):
+      print(f"Error: Target file for {target_agent} not found at {target_file}")
+      return None
+
+   with open(target_file, 'r', encoding='utf-8') as f:
+      target_data = json.load(f)
+
+   my_codes = target_data.get("coding_output", "")
+   my_reflection = target_data.get("reflection", {})
 
    peer_codes_list = []
    for peer in peer_agents:
-      if peer not in coding_results:
-            continue
-      peer_codes_list.append(
-            f"--- {peer.upper()} PERSPECTIVE ---\n"
-            f"{coding_results[peer]}"
-      )
-   if not peer_codes_list:
-      raise ValueError(f"No peer coding results available for '{target_agent}'.")
+      peer_file = os.path.join(base_path, peer, f"{transcript_id}_round_{round_num}_final.json")
+      if os.path.exists(peer_file):
+         with open(peer_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            peer_codes_list.append(f"--- {peer.upper()} PERSPECTIVE ---\n{data['coding_output']}")
+      else:
+         print("No peer results found!")
+    
    peer_codes_content = "\n\n".join(peer_codes_list)
 
    messages = agent_self_reflection_update(
       fixed_profile=fixed_profile,
       my_codes=my_codes,
       peer_codes=peer_codes_content,
-      current_reflection=current_reflection
+      current_reflection=my_reflection
    )
-   response = get_completion(client, model, messages)
+   response = get_completion(messages)
+   time.sleep(2)
    updated_res = response.choices[0].message.content.strip()
 
-   return _parse_json_object(updated_res)
+   output_dir = os.path.join(REFLECTION_OUTPUT_BASE_DIR, target_agent)
+   os.makedirs(output_dir, exist_ok=True)
 
-def save_reflection(
-   reflection,
-   agent_name,
-   output_base_dir
-):
-   agent_ref_dir = os.path.join(output_base_dir, agent_name)
-   os.makedirs(agent_ref_dir, exist_ok=True)
-   pattern = r"reflection_v(\d+)\.json$"
-   files = [f for f in os.listdir(agent_ref_dir) if re.match(pattern, f)]
-
-   if not files:
+   pattern = r"reflection_v(\d+)\.json"
+   existing_files = [f for f in os.listdir(output_dir) if re.match(pattern, f)]
+    
+   if not existing_files:
       next_version = 1
    else:
-      versions = [int(re.search(pattern, f).group(1)) for f in files]
-      next_version = max(versions) + 1
+      version_numbers = [int(re.search(pattern, f).group(1)) for f in existing_files]
+      next_version = max(version_numbers) + 1
 
-   output_path = os.path.join(agent_ref_dir, f"reflection_v{next_version}.json")
+   output_path = os.path.join(output_dir, f"reflection_v{next_version}.json")
 
-   with open(output_path, "w", encoding="utf-8") as f:
-      json.dump(reflection, f, indent=4, ensure_ascii=False)
-   return output_path
+   json_str = updated_res.replace('```json', '').replace('```', '').strip()
+   structured_update = json.loads(json_str)
 
-def get_latest_reflection(agent_name, output_base_dir):
-   agent_ref_dir = os.path.join(output_base_dir, agent_name)
+   with open(output_path, "w", encoding='utf-8') as f:
+      json.dump(structured_update, f, indent=4, ensure_ascii=False)
+
+def get_latest_reflection(agent_name):
+   agent_ref_dir = os.path.join(REFLECTION_OUTPUT_BASE_DIR, agent_name)
    if not os.path.exists(agent_ref_dir):
       return None
 
