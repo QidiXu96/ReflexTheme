@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter
 from coder_agent import *
-from backend.AzureUtils import *
+from AzureUtils import *
 from coder_collaboration_reflection import *
 from dedup import *
 from coding_utils import *
