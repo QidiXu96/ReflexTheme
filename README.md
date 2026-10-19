@@ -3,3 +3,4 @@ We developed Reflexive Thematic Agents (ReflexTheme) to support RTA with LLMs. R
 <img width="3052" height="1688" alt="ReflexTheme Figure 1 (3)" src="https://github.com/user-attachments/assets/5167a4e9-52d6-4727-bb56-a39a43ae00a8" />
 
 Related ReflexTheme coding functions at [ReflexTheme_Utils](./ReflexTheme_Utils/).
+Apply ReflexTheme into covid example transcripts at [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/).
