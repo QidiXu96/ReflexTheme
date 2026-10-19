@@ -14,10 +14,10 @@ def init_client(azure_endpoint, api_key, api_version):
         api_version=api_version
     )
 
-def get_completion(client, model, messages, max_tokens=16384, temperature=0.7, top_p=1, frequency_penalty=0, presence_penalty=0):
+def get_completion(messages, model='gpt-4o-mini', messages, max_tokens=16384, temperature=0.7, top_p=1, frequency_penalty=0, presence_penalty=0):
     if _client is None:
         raise Exception("AzureOpenAI client not initialized. Please call init_client() with your parameters first.")
-    response = client.chat.completions.create(
+    response = _client.chat.completions.create(
         model=model,
         messages=messages,
         max_tokens=max_tokens,
