@@ -1,6 +1,7 @@
 import os, re, glob, json, time, copy
 import pandas as pd
 import numpy as np
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter
 from coder_agent import *
@@ -1206,35 +1207,28 @@ def update_codebook_from_reviewer_results(
 
 ### Final Function
 def run_multi_transcript_dynamic_rounds(
-    client,
-    llm_model,
-    embedding_model,
-    files_list,
+    files_list, # chunk transcript list list
     agents,
-    max_rounds,
+    max_rounds, # 4
     all_agent_initial_reflections,
-    coding_base_dir,
-    final_coding_base_dir,
-    final_coding_without_score_base_dir,
-    reflection_output_dir,
+    coding_base_dir, # independent coding
+    final_coding_base_dir, # final coding --> merge all chunks for a transcript
+    final_coding_without_score_base_dir, # final coding without score
     agent_personas,
     codebook_path,
     review_output_dir,
-    research_question,
-    interviewee,
     novelty_threshold=0.05,
     k=2,
     clue_pool_dir_for_novelty=None
 ):
     all_novelty_logs = []  
 
-    research_dir = os.path.dirname(coding_base_dir) # dataset folder
-    output_dir_1a = os.path.join(research_dir, "clue_pool_step1a")  # merge all agents
-    output_dir_1c = os.path.join(research_dir, "clue_pool_step1c")  # containment dedup
-    output_dir_1d = os.path.join(research_dir, "clue_pool_step1d")  # similarity dedup
-    output_dir_filtered_4 = os.path.join(research_dir, "clue_pool_filtered_4") # score >= 4
-    output_dir_compact = os.path.join(research_dir, "clue_pool_compact") # select the final initial code for a clue
-    os.makedirs(reflection_output_dir, exist_ok=True)
+    Covid_dir = os.path.dirname(coding_base_dir) # dataset folder
+    output_dir_1a = os.path.join(Covid_dir, "clue_pool_step1a")  # merge all agents
+    output_dir_1c = os.path.join(Covid_dir, "clue_pool_step1c")  # containment dedup
+    output_dir_1d = os.path.join(Covid_dir, "clue_pool_step1d")  # similarity dedup
+    output_dir_filtered_4 = os.path.join(Covid_dir, "clue_pool_filtered_4") # score >= 4
+    output_dir_compact = os.path.join(Covid_dir, "clue_pool_compact") # select the final initial code for a clue
 
     if clue_pool_dir_for_novelty is None:
         clue_pool_dir_for_novelty = output_dir_1d
@@ -1247,6 +1241,8 @@ def run_multi_transcript_dynamic_rounds(
     os.makedirs(review_output_dir, exist_ok=True)
     os.makedirs(final_coding_base_dir, exist_ok=True)
     os.makedirs(final_coding_without_score_base_dir, exist_ok=True)
+
+    model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
     for t_idx, selected_files in enumerate(files_list, start=1):
         if not selected_files:
@@ -1280,13 +1276,12 @@ def run_multi_transcript_dynamic_rounds(
                 if not tid:
                     print(f"ERROR! Skipping (filename not matched): {os.path.basename(fp)}")
                     continue
-                transcript = read_docx(fp)
 
                 for agent_name in agents:
                     if (t_idx == 1) and (round_number == 1): # first transcript under first round
-                        agent_reflection = all_agent_initial_reflections[agent_name]  # ref0
+                        agent_reflection = all_agent_initial_reflections  # ref0
                     else:
-                        raw_reflection = get_latest_reflection(agent_name=agent_name, output_base_dir=reflection_output_dir)  # ref1/ref2/... global
+                        raw_reflection = get_latest_reflection(agent_name)  # ref1/ref2/... global
 
                         if not raw_reflection:
                             print(
@@ -1312,33 +1307,24 @@ def run_multi_transcript_dynamic_rounds(
                         )
 
                     try:
-                        result = run_independent_coding(
-                            client=client,
-                            model=llm_model,
-                            transcript=transcript,
-                            agent_name=agent_name,
-                            reflection=agent_reflection,
-                            transcript_id=tid,
-                            chunk_id=chunk_id,
+                        run_independent_coding(
+                            fp,
+                            agent_name,
+                            agent_reflection,
+                            tid,
+                            chunk_id,
                             round_number=round_number,
-                            fixed_profile=agent_personas[agent_name],
-                            coding_memory_content=coding_memory_content,
-                            research_question=research_question,
-                            interviewee=interviewee
+                            coding_memory_content=coding_memory_content
                         )
                         print(f"Done: {agent_name} | chunk {chunk_id} | round {round_number}")
-                        save_coding_result(
-                            result=result,
-                            output_base_dir=coding_base_dir
-                        )
                     except Exception as e:
                         print(f"Error: {agent_name} | chunk {chunk_id} | round {round_number}: {e}")
 
             clean_chunk_round_outputs(coding_base_dir, agents, transcript_id, round_number)
-            merge_chunk_round_outputs(coding_base_dir=coding_base_dir, final_coding_base_dir=final_coding_base_dir, agents=agents, transcript_id=transcript_id, round_number=round_number) # merge each agent chunk results
+            merge_chunk_round_outputs(coding_base_dir, agents, transcript_id, round_number) # merge each agent chunk results
             # _final.json contains score
 
-            remove_importance_score(input_base_dir=final_coding_base_dir, output_base_dir=final_coding_without_score_base_dir) # generate _final_without_score json files
+            remove_importance_score(final_coding_base_dir) # generate _final_without_score json files
 
             # build clue_pool for this round (used for novelty)
             run_merge_all(final_coding_base_dir, output_dir_1a, [transcript_id], [round_number], agents)
@@ -1353,8 +1339,7 @@ def run_multi_transcript_dynamic_rounds(
                 novelty_val = compute_single_transcript_round_novelty(
                     clue_pool_dir=clue_pool_dir_for_novelty,
                     transcript_id=transcript_id,
-                    cur_round=round_number,
-                    embedding_model=embedding_model
+                    cur_round=round_number
                 )
                 all_novelty_logs.append({
                     "transcript_id": transcript_id,
@@ -1376,43 +1361,15 @@ def run_multi_transcript_dynamic_rounds(
             # collaboration (only if we will continue to another round)
             if round_number < max_rounds:
                 print(f"\n--- Collaborative reflection update (creates next ref) ---")
-                coding_results = {}
-                for agent_name in agents:
-                    fp = os.path.join(final_coding_without_score_base_dir, agent_name, f"{transcript_id}_round_{round_number}_final.json")
-
-                    if not os.path.exists(fp):
-                        print(f"[WARN] Missing coding result: {fp}")
-                        continue
-
-                    with open(fp, "r", encoding="utf-8") as f:
-                        coding_results[agent_name] = json.load(f)
-
                 for target_agent in agents:
                     try:
-                        current_reflection = get_latest_reflection(
-                            agent_name=target_agent,
-                            output_base_dir=reflection_output_dir
-                        )
-
-                        if not current_reflection:
-                            current_reflection = copy.deepcopy(
-                                all_agent_initial_reflections[target_agent]
-                            )
-
-                        updated_reflection = run_reflection_update(
-                            client=client,
-                            model=llm_model,
-                            target_agent=target_agent,
-                            fixed_profile=agent_personas[target_agent],
-                            current_reflection=current_reflection,
-                            coding_results=coding_results,
-                            agents=agents
-                        )
-
-                        save_reflection(
-                            reflection=updated_reflection,
-                            agent_name=target_agent,
-                            output_base_dir=reflection_output_dir
+                        run_reflection_update(
+                            target_agent,
+                            agent_personas[target_agent],
+                            transcript_id,
+                            str(round_number),
+                            final_coding_without_score_base_dir,
+                            agents=agents           
                         )
                         print(f"Updated reflection: {target_agent} (after round {round_number})")
                     except Exception as e:
@@ -1450,7 +1407,7 @@ def run_multi_transcript_dynamic_rounds(
         choose_one_code_per_clue(
             input_path=filtered_file,
             output_path=compact_output_file,
-            embedding_model=embedding_model,
+            model=model,
             sim_threshold=0.80
         )
 
@@ -1464,6 +1421,16 @@ def run_multi_transcript_dynamic_rounds(
             retrieval_mode = config["retrieval_mode"]
             review_policy = config["review_policy"]
 
+            print("\n" + "=" * 80)
+            print(f"OPTION {option_id}: {option_name}")
+            print("=" * 80)
+
+            # Option 1: do not initialize/update codebook
+            if option_id == 1:
+                print("Option 1 selected: skip codebook update and move to next transcript.")
+
+                continue
+
             option_codebook_path = get_option_codebook_path(
                 base_codebook_dir=base_codebook_dir,
                 option_id=option_id
@@ -1476,13 +1443,13 @@ def run_multi_transcript_dynamic_rounds(
                 initialize_codebook_from_compact_file(
                     compact_json_path=compact_output_file,
                     codebook_path=option_codebook_path,
-                    embedding_model=embedding_model,
+                    model=model,
                     retrieval_mode=retrieval_mode
                 )
 
                 codebook_compact(
                     codebook_path=option_codebook_path,
-                    embedding_model=embedding_model,
+                    model=model,
                     threshold=0.80,
                     retrieval_mode=retrieval_mode
                 )
@@ -1497,7 +1464,12 @@ def run_multi_transcript_dynamic_rounds(
                     f"codebook_after_{transcript_id}.json"
                 )
 
+                print("\n=== Codebook Size (after compact) ===")
+                print(len(codebook.get("entries", [])))
+
                 save_codebook(codebook, versioned_path)
+
+                print(f"Initialized option {option_id} codebook from transcript {transcript_id}")
 
                 continue
 
@@ -1512,22 +1484,31 @@ def run_multi_transcript_dynamic_rounds(
             retrieval_results = retrieve_for_transcript_from_codebook(
                 compact_json_path=compact_output_file,
                 codebook=codebook,
-                embedding_model=embedding_model,
+                model=model,
                 top_k=3,
                 high_threshold=0.80,
                 retrieval_mode=retrieval_mode,
                 review_policy=review_policy
             )
 
-            reuse_results, reviewer_results = split_retrieval_results_by_decision(retrieval_results)
+            reuse_results, reviewer_results = split_retrieval_results_by_decision(
+                retrieval_results
+            )
+
+            print("\n=== Split Results ===")
+            print(f"Reuse count: {len(reuse_results)}")
+            print(f"Reviewer count: {len(reviewer_results)}")
 
             if reuse_results:
                 reuse_summary = merge_reuse_results_into_codebook(
                     codebook=codebook,
                     reuse_results=reuse_results,
-                    embedding_model=embedding_model,
+                    model=model,
                     retrieval_mode=retrieval_mode
                 )
+
+                print("\n=== Reuse Merge Summary ===")
+                print(reuse_summary)
 
             if reviewer_results:
                 all_reviewer_parsed = []
@@ -1547,8 +1528,11 @@ def run_multi_transcript_dynamic_rounds(
                         retrieval_mode=retrieval_mode
                     )
 
+                    # print(f"\n=== Reviewer Input for: {item.get('code_name', '')} ===")
+                    # print(messages)
+
                     try:
-                        resp = get_completion(client=client, model=llm_model, messages=messages)
+                        resp = get_completion(messages)
 
                     except Exception as e:
                         print(f"ERROR! WARNING: API error for {item.get('code_name', '')}: {e}")
@@ -1564,7 +1548,7 @@ def run_multi_transcript_dynamic_rounds(
                             clues=clues,
                             retrieval_mode=retrieval_mode
                         )
-                        embedding = embedding_model.encode([embedding_text], normalize_embeddings=True)[0]
+                        embedding = model.encode([embedding_text], normalize_embeddings=True)[0]
 
                         add_new_entry(
                             codebook=codebook,
@@ -1600,7 +1584,7 @@ def run_multi_transcript_dynamic_rounds(
                             clues=clues,
                             retrieval_mode=retrieval_mode
                         )
-                        embedding = embedding_model.encode([embedding_text], normalize_embeddings=True)[0]
+                        embedding = model.encode([embedding_text], normalize_embeddings=True)[0]
 
                         add_new_entry(
                             codebook=codebook,
@@ -1620,6 +1604,9 @@ def run_multi_transcript_dynamic_rounds(
 
                     review_text = review_content.strip()
 
+                    print("\n=== Reviewer Output ===")
+                    print(review_text)
+
                     parsed = parse_reviewer_output_simple(review_text)
                     if not parsed:
                         print(f"WARNING: Failed to parse reviewer output for: {item.get('code_name', '')}")
@@ -1635,7 +1622,7 @@ def run_multi_transcript_dynamic_rounds(
                             clues=clues,
                             retrieval_mode=retrieval_mode
                         )
-                        embedding = embedding_model.encode([embedding_text], normalize_embeddings=True)[0]
+                        embedding = model.encode([embedding_text], normalize_embeddings=True)[0]
 
                         add_new_entry(
                             codebook=codebook,
@@ -1690,9 +1677,12 @@ def run_multi_transcript_dynamic_rounds(
                     codebook=codebook,
                     reviewer_results=all_reviewer_parsed,
                     transcript_id=transcript_id,
-                    embedding_model=embedding_model,
+                    model=model,
                     retrieval_mode=retrieval_mode
                 )
+
+                print("\n=== Reviewer Summary ===")
+                print(update_summary)
 
                 total_accounted = (
                     update_summary["n_merged"]
@@ -1711,7 +1701,7 @@ def run_multi_transcript_dynamic_rounds(
 
             codebook_compact(
                     codebook_path=option_codebook_path,
-                    embedding_model=embedding_model,
+                    model=model,
                     threshold=0.80,
                     retrieval_mode=retrieval_mode
                 ) # read, compact, save
@@ -1720,6 +1710,9 @@ def run_multi_transcript_dynamic_rounds(
                 option_codebook_path,
                 retrieval_mode=retrieval_mode
             ) # load compact version
+
+            print("\n=== Codebook Size (after compact) ===")
+            print(len(codebook.get("entries", [])))
 
             versioned_path = os.path.join(
                 os.path.dirname(option_codebook_path),
