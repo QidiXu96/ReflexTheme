@@ -20,21 +20,21 @@ The profile has three layers:
    - coding reflection thinking history (thought process)
 """
 
-import json, os, re
-from backend.AzureUtils import get_completion
+import json, os, re, time
+from AzureUtils import *
+
+DEFAULT_OUTPUT_BASE_DIR = "/home/ReflexCoTI/Covid/independent_coding"
+DEFAULT_RESEARCH_QUESTION = "how the pandemic affected service delivery, health workers, patient access to services, leadership, and governance, and what extent the legacy of the 2013–16 Ebola outbreak influenced the COVID-19 response and public perception"
+DEFAULT_INTERVIEWEE = "health workers, policymakers, and patients between Oct-Dec 2020"
 
 def coder_agent(
     transcript,
     fixed_profile,
     reflection_content,
     coding_memory_content=None,
-    research_question=None,
-    interviewee=None
+    research_question=DEFAULT_RESEARCH_QUESTION,
+    interviewee=DEFAULT_INTERVIEWEE
 ):
-    if not research_question:
-        raise ValueError("research question must be provided.")
-    if not interviewee:
-        raise ValueError("interviewee must be provided.")
     ### previous coding results (avaliable for 2+ round) ###
     coding_memory = ""
 
@@ -177,40 +177,136 @@ def coder_agent(
     ]
     return messages
 
-def run_independent_coding(
-    client,
-    model,
+def healthworker_coder(
     transcript,
+    reflection_content,
+    coding_memory_content=None
+):
+    fixed_profile = """
+    You are a senior clinical nurse in your early 50s who has spent over 20 years working in public hospitals and community health facilities. You worked directly with patients during infectious disease outbreaks and were involved in implementing infection prevention measures, adapting services, and supporting colleagues through periods of high demand.
+    As a senior clinical nurse, you frequently used the healthcare system, and you can bring a frontline healthcare delivery perspective when coding a transcript.
+    You value patient care, staff safety, and maintaining healthcare services during crises.
+    You are especially attentive to workload pressures, staffing challenges, infection risks, disruptions to care delivery, and practical adaptations made by health workers.
+    You may underestimate broader political, governance, or societal influences that shape healthcare experiences.
+    """.strip()
+
+    return coder_agent(
+        transcript=transcript,
+        fixed_profile=fixed_profile,
+        reflection_content=reflection_content,
+        coding_memory_content=coding_memory_content
+    )
+
+def policy_maker_coder(
+    transcript,
+    reflection_content,
+    coding_memory_content=None
+):
+    fixed_profile = """
+    You are a senior public health policy maker in your late 50s who has spent over 20 years working within national health systems and advising on health emergency preparedness and response. You were involved in developing policies during public health emergencies and coordinating responses across government agencies and healthcare organizations.
+    As a health policy maker, you can bring a systems-level governance perspective when coding a transcript.
+    You value effective leadership, health system resilience, preparedness, and evidence-informed decision making.
+    You are especially attentive to governance structures, policy implementation, resource allocation, institutional coordination, and lessons learned from previous outbreaks such as Ebola.
+    You may underestimate the everyday realities and emotional experiences of patients and frontline health workers. 
+    """.strip()
+
+    return coder_agent(
+        transcript=transcript,
+        fixed_profile=fixed_profile,
+        reflection_content=reflection_content,
+        coding_memory_content=coding_memory_content
+    )
+
+
+def patient_coder(
+    transcript,
+    reflection_content,
+    coding_memory_content=None
+):
+    fixed_profile = """
+    You are a community member in your late 40s who relied on healthcare services before and during the COVID-19 pandemic. You experienced changes in healthcare access, public health restrictions, and communication from health authorities, while observing how your community responded to infectious disease outbreaks.
+    As a patient, you frequently used the healthcare system, and you bring a lived-experience perspective when coding a transcript.
+    You value accessible healthcare, trust, clear communication, and respectful treatment.
+    You are especially attentive to barriers to care, experiences of healthcare services, public perceptions, trust in institutions, fear, uncertainty, and community responses to disease outbreaks.
+    You may underestimate organizational, policy, or resource constraints faced by health systems.    
+    """.strip()
+
+    return coder_agent(
+        transcript=transcript,
+        fixed_profile=fixed_profile,
+        reflection_content=reflection_content,
+        coding_memory_content=coding_memory_content
+    )
+
+def qualitative_researcher_coder(
+    transcript,
+    reflection_content,
+    coding_memory_content=None
+):
+    fixed_profile = """
+    You are a qualitative health researcher in your mid-50s who have spent over 15 years conducting qualitative studies involving patients, caregivers, and healthcare professionals. You have extensive experience using reflexive thematic analysis and teaching qualitative research methods.
+    As a qualitative researcher and reflexive thematic analysis methodologist, you are a researcher studying healthcare experiences, and you can bring a methodological perspective. 
+    You value reflexivity and interpretive transparency.
+    You are especially attentive to interpretive transparency and reflexivity.
+    You may underestimate operational healthcare challenges or policy constraints that are not explicitly discussed in the transcript.
+    """.strip()
+
+    return coder_agent(
+        transcript=transcript,
+        fixed_profile=fixed_profile,
+        reflection_content=reflection_content,
+        coding_memory_content=coding_memory_content
+    )
+
+coder_functions = {
+    "healthworker": healthworker_coder,
+    "policy_maker": policy_maker_coder,
+    "patient": patient_coder,
+    "qualitative_researcher": qualitative_researcher_coder
+}
+
+def run_independent_coding(
+    transcript_file,
     agent_name,
     reflection,
     transcript_id,
     chunk_id,
     round_number,
-    fixed_profile,
-    coding_memory_content=None,
-    research_question=None,
-    interviewee=None
+    coding_memory_content=None
 ):
-    if not fixed_profile:
-        raise ValueError(f"Prepared profile is required for agent '{agent_name}'.")
+    transcript_chunk = read_docx(transcript_file)
+
+    coding_func = coder_functions.get(agent_name)
+
+    if coding_func is None:
+        raise ValueError(f"Agent '{agent_name}' not found in coder_functions.")
 
     if isinstance(reflection, dict) and agent_name in reflection:
         current_reflection = reflection[agent_name]
     else:
         current_reflection = reflection
 
-    messages = coder_agent(
-        transcript=transcript,
-        fixed_profile=fixed_profile,
+    messages = coding_func(
+        transcript=transcript_chunk,
         reflection_content=current_reflection,
-        coding_memory_content=coding_memory_content,
-        research_question=research_question,
-        interviewee=interviewee
+        coding_memory_content=coding_memory_content
     )
-    response = get_completion(client, model, messages)
+
+    response = get_completion(messages)
+    time.sleep(2)
+
     res = response.choices[0].message.content.strip()
 
-    return {
+    output_dir = os.path.join(DEFAULT_OUTPUT_BASE_DIR, agent_name)
+    os.makedirs(output_dir, exist_ok=True)
+
+    file_name = f"round_{round_number}_{transcript_id}_chunk_{chunk_id}"
+
+    json_path = os.path.join(output_dir, f"{file_name}.json")
+
+    md_path = os.path.join(output_dir, f"{file_name}.md")
+
+    data_to_save = {
         "agent": agent_name,
         "round": round_number,
         "transcript": transcript_id,
@@ -219,37 +315,30 @@ def run_independent_coding(
         "coding_output": res
     }
 
-def save_coding_result(result, output_base_dir):
-    agent_name = result["agent"]
-    round_number = result["round"]
-    transcript_id = result["transcript"]
-    chunk_id = result["chunk"]
+    with open(json_path, "w", encoding="utf-8") as json_file:
+        json.dump(data_to_save, json_file, indent=4, ensure_ascii=False)
 
-    output_dir = os.path.join(output_base_dir, agent_name)
-    os.makedirs(output_dir, exist_ok=True)
+    with open(md_path, "w", encoding="utf-8") as md_file:
+        md_file.write(res)
 
-    file_name = (
-        f"round_{round_number}_"
-        f"{transcript_id}_"
-        f"chunk_{chunk_id}")
-    json_path = os.path.join(output_dir, f"{file_name}.json")
-    
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=4, ensure_ascii=False)
+    return res, json_path, md_path
 
-    return json_path
-
-def remove_importance_score(input_base_dir, output_base_dir):
-    # input_base_dir: one transcript (all chunks) coding results under a coder agent
+def remove_importance_score(final_coding_base_dir):
+    # final_coding_base_dir: one transcript (all chunks) coding results under a coder agent
     pattern = r'(?im)^[ \t]*Importance\s+Score\s*:\s*\[?\s*[1-5]\s*\]?\s*$\n?'
 
-    for agent in os.listdir(input_base_dir):
-        agent_dir = os.path.join(input_base_dir, agent)
+    new_base_dir = final_coding_base_dir.replace(
+        "final_coding",
+        "final_coding_without_score"
+    )
+
+    for agent in os.listdir(final_coding_base_dir):
+        agent_dir = os.path.join(final_coding_base_dir, agent)
 
         if not os.path.isdir(agent_dir):
             continue
 
-        new_agent_dir = os.path.join(output_base_dir, agent)
+        new_agent_dir = os.path.join(new_base_dir, agent)
         os.makedirs(new_agent_dir, exist_ok=True)
 
         for fname in os.listdir(agent_dir):
