@@ -1,0 +1,901 @@
+{
+  "transcript_id": "0001",
+  "round": 1,
+  "agents": [
+    "healthworker",
+    "policy_maker",
+    "patient",
+    "qualitative_researcher"
+  ],
+  "n_items": 111,
+  "items": [
+    {
+      "clues": "People were having this concept that it won’t be treated by the English way unless I go for traditional native medicines that the only it could be treated. I was using the traditional way and I saw no improvements that’s when I decided to go to the hospital.",
+      "initial code": "Patient perceives traditional medicine as primary treatment",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I went there, I met with the doctor, the doctor planned it and gave me all the guides how to go about it. that CHO did you meet him at the hospital or where do you know him? ... we were staying here at the same house.",
+      "initial code": "Patient's access to services is influenced by community referral",
+      "importance score": 3,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Corona is real and that why the precautions that the government has put in place that the whole world has put in place they said we should abide by them, it real. they said we should use because when you sneeze it won’t be able to spread so that was all.",
+      "initial code": "Patient acknowledges COVID-19 precautions as necessary",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "if these were not put in place like what we are talking here we shouldn’t not have been able to discuss them. it affected people especially those with asthma diseases the ones with pressure the thing was affecting them.",
+      "initial code": "Government measures significantly impact daily life",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "look at the results that came out because schools closed earlier then second term school was closed. there was no studies no caring was there, so that was one of the impacts.",
+      "initial code": "School closures lead to negative educational outcomes",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "there was no transportation, especially district lockdown transportation was high. the transport fare from here to Freetown they were asking for le 150,000 can you imagine?",
+      "initial code": "Transportation issues arise during lockdown",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the ones that has no chance you see them sitting down lonely observing and say how, grumbling all over like what is this? the ones that are living on daily bread how will they survive so those are the grumbles that we were having.",
+      "initial code": "Lockdown creates economic strain for daily wage earners",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "social distancing is more preventable because of that saliva or the sneezes from someone that it won’t meet with you. the day when you say lockdown people that has the chance you see them buying things for their homes.  \nImportance Score: 4\n\nOUTPUT",
+      "initial code": "Social distancing measures affect community interactions",
+      "importance score": null,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the increase in number of death. Of cause the death was low but the number of affected people was increasing so that was making everyone scared that you wouldn’t know who has the sick.",
+      "initial code": "Health worker experiences fear of unknown illness transmission",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they enforced it, they enforced the measures, you don’t abide, and they fine a levy on you.",
+      "initial code": "Government enforcement of health measures",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "during the time of EBOLA their sensitization was if you are sick you call 117... there was no social distancing measures as compared to this now social distance.",
+      "initial code": "Differences in government response between Ebola and COVID-19",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the EBOLA outbreak helped you and your community to prepare for this COVID? exactly.",
+      "initial code": "Community adherence to government guidelines due to past experiences",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the restriction the sensitization was there but during the time of the EBOLA their sensitization was if you are sick you call 117, don’t hide a sick person.",
+      "initial code": "Comparison of government communication strategies",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the EBOLA when it came we had no idea now when the COVID is here the previous government they have already know although they still don’t have measures.",
+      "initial code": "Health worker reflections on previous public health crises",
+      "importance score": 3,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "as this thing break down this government say no let put measures in place now, get experts, all measures put in place so the thing didn’t escalate to that level.",
+      "initial code": "Public perception of government effectiveness during crises",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "because they attack the disease earlier. they give time to the COVID quickly because as we heard it from Europe we had no case here but we had already has a case so immediately when we had that one case government announces it.",
+      "initial code": "Government response to COVID-19 rated positively for early action",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they were creating centers for admitting people but there was no position so the people who are the victims that were going to those centers were grumbling. government should try to improve on the health centers, more improvement on the health system especially the drugs.",
+      "initial code": "Criticism of inadequate healthcare infrastructure during the pandemic",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "certain drugs you need in the hospital, unless they refer you to another facility. certain drugs that they prescribed for me it wasn’t available.",
+      "initial code": "Availability of essential drugs as a barrier to healthcare access",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "if you are not careful you will come out again with another diseases. if you see behind my back so many rashes I went there and had encounter another sickness then chicken pox had shown on me.",
+      "initial code": "Concerns about hospital conditions leading to secondary health issues",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I was in doubt because the time when I did this operation for my hernia in 2015 it costs le 500,000 but initially when I went to the finance doctor told me go and pay to that woman, me and the doctor has discussed everything the woman went on writing thinking it was hernia and she wrote le 900,000. All the drugs are very expensive for this particular operation.",
+      "initial code": "High costs of healthcare and surgery during the pandemic",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the nurses in the private hospital are more caring, the wards very lonely, very quiet. they will must come around and asked you if you have your drugs then you ready to administered but if the drugs is not available they will just pass you.",
+      "initial code": "Comparing quality of care between private and government hospitals",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "that in fact was an emergency, I went there under emergency during that time. I should be out on Monday but I decided to discharge on Sunday.",
+      "initial code": "Emergency care experiences during the pandemic",
+      "importance score": 3,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I wouldn’t want to go and do operation and doctor don’t have acquaintance with me. I took his number and we have been communicating day and night so I was closed to him before doing the operation.",
+      "initial code": "Importance of personal relationships with healthcare providers",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they are pandemic. They already has it so they should put more premium on them but surgical they should also put premium they should care for us because if they do not care where they do the operation it could reoccur so if you are not careful you will die so they should care for us more.",
+      "initial code": "Surgical patients feel neglected compared to COVID patients",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "because when the thing has come from international because we see they provide donor for them, they pour more money on COVID but we never saw donor for operation.",
+      "initial code": "Perception of unequal resource allocation",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the health workers have extra besides what they paid them because if catches you, you have risk your life it would transfer so therefore they give them extra charges extra payments from your normal work.",
+      "initial code": "Concern about health worker safety",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they should improve on the monitoring not only the buildings like all the facilities more especially the drugs should be available in the hospitals. When you need when they write your prescription you go down and buy quickly and come and go.",
+      "initial code": "Need for improved drug availability in hospitals",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "if there is a vaccine that they will inject a person for him not to have that diseases that what they should be fighting for let say an Anti-drug, take the drug and it will be in your system for years.",
+      "initial code": "Recommendation for preventive measures during outbreaks",
+      "importance score": 4,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "people were having other diseases which is not EBOLA but they are afraid to go to the hospital.",
+      "initial code": "Fear of seeking care during the pandemic",
+      "importance score": 5,
+      "agent": "healthworker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Corona is real and that why the precautions that the government has put in place that the whole world has put in place they said we should abide by them, it real.",
+      "initial code": "Community perception of COVID-19 as a real threat",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "People were having this concept that it won’t be treated by the English way unless I go for traditional native medicines that the only it could be treated...",
+      "initial code": "Traditional medicine influences healthcare decisions",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "It one of the measures that government really put in place like the face mask and all of cause it affected people especially those with asthma diseases...",
+      "initial code": "Government lockdown impacts on daily life",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "look at the results that came out because schools closed earlier then second term school was closed so the whole of third term there was no school...",
+      "initial code": "School closures leading to poor academic outcomes",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "well there was no transportation, especially district lockdown transportation was high, and the people with money travels only...",
+      "initial code": "Transportation challenges during lockdown",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the ones that has no chance you see them sitting down lonely observing and say how, grumbling all over like what is this?... how will they survive...",
+      "initial code": "Economic strain on daily wage earners during lockdown",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "social distancing is more preventable because of that saliva or the sneezes from someone that it won’t meet with you...",
+      "initial code": "Social distancing as a preventive measure",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "it was affecting them that one and three days that we were sitting down especially for we in the districts it was affecting us.",
+      "initial code": "Challenges faced by vulnerable populations during lockdown",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "we restrict ourselves. ... the government said we should sit let us sit and for now that the government has ease on us its more better.",
+      "initial code": "Experience of stricter COVID-19 restrictions",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "during the time of EBOLA the restriction was there but it was not that much, and for that made people to come here because we had no experience. ... as compared to this one before it came government had blocked all the borders and all the districts.",
+      "initial code": "Comparison of government responses to Ebola and COVID-19",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "no mask was available, no social distancing. ... they will come with food because they were keeping people in there for three weeks.",
+      "initial code": "Lack of social distancing and protective measures during Ebola",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they enforced it, they enforced the measures, you don’t abide, and they fine a levy on you. ... they involve all the stakeholders so the fight was a national fight to the level that it would be.",
+      "initial code": "Government enforcement of COVID-19 guidelines",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "exactly because is just like when they say war ... the EBOLA when it came we had no idea now when the COVID is here the previous government they have already know although they still don’t have measures.",
+      "initial code": "Preparedness from previous Ebola experience",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they responded quickly. ... because they attack the disease earlier.",
+      "initial code": "Quick government response to COVID-19",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they were putting centers wherein the position was not there, they were creating centers for admitting people but there was no position...",
+      "initial code": "Government health centers poorly positioned",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "even the infected people at the end of the day then even the workers the soldiers that were on the forefront it reach at a time the salary time they didn’t pay them...",
+      "initial code": "Delayed salary payments to health workers",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "government should try to improve on the health centers, more improvement on the health system especially the drugs. Let the drugs be available in the hospitals...",
+      "initial code": "Availability of essential drugs in hospitals",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the toilet facility sanitation. Government hospital has no toilet facility they are there but the control measures is poor so they closed them.",
+      "initial code": "Poor sanitation and facilities in government hospitals",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the time when I did this operation for my hernia in 2015 it costs le 500,000 but initially when I went to the finance doctor told me go and pay to that woman, me and the doctor has discussed everything the woman went on writing thinking it was hernia and she wrote le 900,000...",
+      "initial code": "Increased costs of healthcare during COVID-19",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the nurses in the private hospital are more caring, the wards very lonely, very quiet like if you go there you don’t hear noise but unlike for government hospital a lot of noise.",
+      "initial code": "Comparison of care between private and government hospitals",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I will make sure I have a good relation. So me and doctor [retracted] has had that good relations, I took his number and we have been communicating day and night...",
+      "initial code": "Relationship with healthcare providers enhances care",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I was just been relieved from the EBOLA, there was no caring.",
+      "initial code": "Impact of past Ebola experience on current healthcare perception",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "government announces it, so they have given their own measures so we that has the responsibilities we the citizens.",
+      "initial code": "Government communication regarding COVID-19",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they should put more premium on them but surgical they should also put premium they should care for us because if they do not care where they do the operation it could reoccur so if you are not careful you will die so they should care for us more. ... because we see they provide donor for them, they pour more money on COVID but we never saw donor for operation.",
+      "initial code": "Perception of unequal resource allocation",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they should improve on the monitoring not only the buildings like all the facilities more especially the drugs should be available in the hospitals. When you need when they write your prescription you go down and buy quickly and come and go. By the time you ran to town to go and buy drugs and come you will meet the patients have collapse.",
+      "initial code": "Concerns about timely access to medication",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "let them improve on it the light system in the hospital should be okay. ... they should improve on the monitoring not only the buildings like all the facilities more especially the drugs should be available in the hospitals.",
+      "initial code": "Need for better healthcare infrastructure",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Yes ... because it contagious, it a thing that transfer if you are not careful and how many workers did it kill I think it 2 the one doctor I think he was lecturing and the one is here so therefore we were arguing and arguing.",
+      "initial code": "Support for additional resources for COVID care",
+      "importance score": 3,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "if there is a vaccine that they will inject a person for him not to have that diseases that what they should be fighting for let say an Anti-drug, take the drug and it will be in your system for years so that even if the outbreak comes you won’t get infected.",
+      "initial code": "Recommendations for vaccination strategies",
+      "importance score": 4,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "people were having other diseases which is not EBOLA but they are afraid to go to the hospital.",
+      "initial code": "Fear of seeking care during the pandemic",
+      "importance score": 5,
+      "agent": "policy_maker",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Corona is real and that why the precautions that the government has put in place that the whole world has put in place they said we should abide by them, it real.",
+      "initial code": "Patient perceives the seriousness of COVID-19",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "People were having this concept that it won’t be treated by the English way unless I go for traditional native medicines that the only it could be treated and that was the concept I was having.",
+      "initial code": "Patient doubts effectiveness of healthcare system without traditional remedies",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "It one of the measures that government really put in place like the face mask and all of cause it affected people especially those with asthma diseases the ones with pressure the thing was affecting them.",
+      "initial code": "Government lockdown measures impacting daily life",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "There was no transportation, especially district lockdown transportation was high, and the people with money travels only because if it wasn’t for that, business could have been closed.",
+      "initial code": "Transportation issues during lockdown",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "When school was closed look at the results that came out because schools closed earlier then second term school was closed so the whole of third term there was no school then we should have closed school the 15th or 25th of July then school closes the 31st of March school did not reopen till August.",
+      "initial code": "School closures affecting educational outcomes",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "The day when you say lockdown people that has the chance you see them buying things for their homes and the ones that has no chance you see them sitting down lonely observing and say how, grumbling all over like what is this?",
+      "initial code": "Community grumbling about government support during lockdown",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "The biggest challenge was this face mask and lockdown because the day when you say lockdown people that has the chance you see them buying things for their homes.",
+      "initial code": "Challenges of wearing face masks",
+      "importance score": 3,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "we were not interacting, we were not visiting no one, even when you visit someone he or she will tell you no go to your own house, so that how they were telling us. yes we restrict ourselves. the increase in number of death. Of cause the death was low but the number of affected people was increasing so that was making everyone scared...",
+      "initial code": "Community self-restriction during pandemic",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "during the time of EBOLA the restriction was there but it was not that much, and for that made people to come here because we had no experience. as compared to this one before it came government had blocked all the borders and all the districts. they are able to tackle the situation.",
+      "initial code": "Comparison of government responses between Ebola and COVID-19",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the increase in number of death. Of cause the death was low but the number of affected people was increasing so that was making everyone scared... you wouldn’t know who has the sick so if the government said we should sit let us sit... the restriction the sensitization was there but during the time of the EBOLA their sensitization was if you are sick you call 117...",
+      "initial code": "Public fear influenced by rising COVID-19 cases",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they enforced it, they enforced the measures, you don’t abide, and they fine a levy on you. They put it right on every districts to the chiefdoms they involve all the stakeholders... the fight was a national fight to the level that it would be but anyway they fight for it.",
+      "initial code": "Enhanced government enforcement during COVID-19",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the EBOLA outbreak helped you and your community to prepare for this COVID? because they enforced it, they enforced the measures... the previous government they have already know although they still don’t have measures but as time goes now they said let put certain restriction in place...",
+      "initial code": "Community preparedness through past outbreak experience",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they attack the disease earlier. ... government announces it, so they have given their own measures so we that has the responsibilities we the citizens.",
+      "initial code": "Quick government response to COVID-19",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "initially like they blame them because they were putting centers wherein the position was not there, ... the ones that they put in the camps they were not able to see to them quickly.",
+      "initial code": "Criticism of healthcare facilities and access",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "government should try to improve on the health centers, more improvement on the health system especially the drugs. ... Let the drugs be available in the hospitals because sometimes when you go to the hospital certain drugs you need in the hospital, unless they refer you to another facility.",
+      "initial code": "Demand for improved healthcare resources",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the control measures is poor so they closed them. ... you will go there and if you are not careful you will come out again with another diseases.",
+      "initial code": "Lack of sanitation and infrastructure in hospitals",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the time when I did this operation for my hernia in 2015 it costs le 500,000 ... when I went there the woman gave me le 1,200,000 for the same operation.",
+      "initial code": "Increased costs of medical procedures",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the nurses in the private hospital are more caring ... unlike for government hospital a lot of noise.",
+      "initial code": "Perceived care differences between public and private hospitals",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "transportation was available, I went there freely and upon returning I also came freely.",
+      "initial code": "Availability of transportation for healthcare access",
+      "importance score": 3,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "I will make sure I have a good relation. ... I took his number and we have been communicating day and night.",
+      "initial code": "Personal relationship with healthcare providers",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "really, really I satisfied with the care, till now and Thursday I should go for checkup because that what the doctor told me.",
+      "initial code": "Patient satisfaction with care during COVID",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they are pandemic. They already has it so they should put more premium on them but surgical they should also put premium they should care for us because if they do not care where they do the operation it could reoccur so if you are not careful you will die so they should care for us more.",
+      "initial code": "Perception of prioritization of COVID patients over surgical patients",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "when the thing has come from international because we see they provide donor for them, they pour more money on COVID but we never saw donor for operation.",
+      "initial code": "Concerns about resource allocation favoring COVID patients",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "because they are giving them extra payments is that not so? The health workers have extra besides what they paid them because if catches you, you have risk your life it would transfer.",
+      "initial code": "Perception of healthcare workers receiving additional compensation for COVID care",
+      "importance score": 4,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they should improve on the monitoring not only the buildings like all the facilities more especially the drugs should be available in the hospitals.",
+      "initial code": "Recommendations for hospital improvements during a pandemic",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "if there is a vaccine that they will inject a person for him not to have that diseases that what they should be fighting for.",
+      "initial code": "Advocacy for preventive measures against future outbreaks",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "people were having other diseases which is not EBOLA but they are afraid to go to the hospital.",
+      "initial code": "Fear of seeking care among non-COVID patients",
+      "importance score": 5,
+      "agent": "patient",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "People were having this concept that it won’t be treated by the English way unless I go for traditional native medicines that the only it could be treated. ... I saw no improvements that’s when I decided to go to the hospital.",
+      "initial code": "Patient experiences barriers to accessing healthcare",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Corona is real and that why the precautions that the government has put in place that the whole world has put in place they said we should abide by them, it real.",
+      "initial code": "Perception of COVID-19 as a serious threat",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "It one of the measures that government really put in place like the face mask and all of cause it affected people especially those with asthma diseases... it was affecting us especially the lockdown for the disables and vulnerable it was affecting them.",
+      "initial code": "Government measures impact daily life",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "when school was closed look at the results that came out because schools closed earlier then second term school was closed... there was no studies no caring was there.",
+      "initial code": "Educational disruptions due to school closures",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "well there was no transportation, especially district lockdown transportation was high, and the people with money travels only... the transport fare from here to Freetown they were asking for le 150,000 can you imagine?",
+      "initial code": "Transportation challenges during lockdown",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the biggest challenge was this face mask and lockdown because the day when you say lockdown people that has the chance you see them buying things for their homes... but for us here now they will just lock us in they will not feed us.",
+      "initial code": "Social isolation during lockdown",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "we were not interacting, we were not visiting no one, even when you visit someone he or she will tell you no go to your own house, so that how they were telling us. yes we restrict ourselves. the increase in number of death. Of cause the death was low but the number of affected people was increasing so that was making everyone scared...",
+      "initial code": "Restrictions on social interactions during the pandemic",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "during the time of EBOLA the restriction was there but it was not that much, and for that made people to come here because we had no experience. as compared to this one before it came government had blocked all the borders and all the districts. the lockdown was enormous like in that time it was two times that we had lockdown 3 times...",
+      "initial code": "Comparison of government responses between Ebola and COVID-19",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they enforced it, they enforced the measures, you don’t abide, and they fine a levy on you. They put it right on every districts to the chiefdoms they involve all the stakeholders so the fight was a national fight... the previous government they have already know although they still don’t have measures but as time goes now they said let put certain restriction in place...",
+      "initial code": "Increased adherence to government guidelines during COVID-19",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the EBOLA outbreak helped you and your community to prepare for this COVID? exactly. now when the COVID is here the previous government they have already know although they still don’t have measures...",
+      "initial code": "Legacy of Ebola influencing COVID-19 response",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "much, more better the first case that they presented on that day... he lock the districts of cause the restriction the sensitization was there... so the thing didn’t escalate to that level.",
+      "initial code": "Perception of government effectiveness in managing the pandemic",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they attack the disease earlier. ... government announces it, so they have given their own measures...",
+      "initial code": "Government's early response to COVID-19",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the soldiers that were on the forefront it reach at a time the salary time they didn’t pay them... they didn’t look to them quickly...",
+      "initial code": "Lack of timely payment for healthcare workers",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "...certain drugs you need in the hospital, unless they refer you to another facility... the drugs that I needed... it wasn’t available...",
+      "initial code": "Insufficient availability of essential drugs in hospitals",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the toilet facility sanitation. Government hospital has no toilet facility... if you are not careful you will come out again with another diseases...",
+      "initial code": "Poor sanitation and infrastructure in government hospitals",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "initially when I went to the finance doctor told me go and pay to that woman... from 2015 to 2020 automatically they have given me le 500,000 for 2015 for hernia then when I went there... le 1,200,000 for the same operation...",
+      "initial code": "Increased healthcare costs during the pandemic",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "the nurses in the private hospital are more caring... unlike for government hospital a lot of noise...",
+      "initial code": "Variability in quality of care between public and private hospitals",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "...I will make sure I have a good relation. So me and doctor [retracted] has had that good relations...",
+      "initial code": "Personal connections influencing healthcare experiences",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "government should try to improve on the health centers, more improvement on the health system...",
+      "initial code": "Perceived government accountability for healthcare improvements",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "really, really I satisfied with the care, till now and Thursday I should go for checkup because that what the doctor told me.",
+      "initial code": "Patient feels satisfied with surgical care during COVID",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "yes because they are pandemic. They already has it so they should put more premium on them but surgical they should also put premium they should care for us...",
+      "initial code": "Patient perceives differences in care between COVID and surgical patients",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they pour more money on COVID but we never saw donor for operation (laughing)",
+      "initial code": "Patient expresses concern about funding disparities for COVID vs. surgical care",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they are giving them extra payments is that not so? The health workers have extra besides what they paid them because if catches you, you have risk your life...",
+      "initial code": "Patient acknowledges increased risk and compensation for health workers during COVID",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "they should improve on the monitoring not only the buildings like all the facilities more especially the drugs should be available in the hospitals.",
+      "initial code": "Patient emphasizes the need for improvements in hospital facilities",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "Let have that kind of system let them inject you with an Anti-drugs with all the ones that are not infected...",
+      "initial code": "Patient suggests the need for preventive measures in future outbreaks",
+      "importance score": 4,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    },
+    {
+      "clues": "people were having other diseases which is not EBOLA but they are afraid to go to the hospital.",
+      "initial code": "Patient indicates fear of visiting hospitals due to COVID",
+      "importance score": 5,
+      "agent": "qualitative_researcher",
+      "transcript_id": "0001",
+      "round": 1
+    }
+  ]
+}
