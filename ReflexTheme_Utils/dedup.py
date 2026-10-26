@@ -1,8 +1,20 @@
+"""
+Purpose:
+    Merge coding results across agents and remove duplicate or overlapping clues.
+
+Use this file when:
+    - Combining coding outputs from multiple coder agents
+    - Removing exact duplicate clues
+    - Merging clues when one is contained within another
+    - Merging highly similar overlapping clues
+    - Building a consolidated clue pool for downstream analysis
+"""
+
 import re, json, os, glob
 from difflib import SequenceMatcher
 
-# process one agent result
 def extract_res(json_files, field="coding_output"):
+    # process one agent result
     """
     [
         {
@@ -43,8 +55,8 @@ def extract_res(json_files, field="coding_output"):
 
     return all_extracted_items
 
-# merge all agents results for one transcript (all chunks) one round
 def merge_agents_one_transcript_round(base_path, transcript_id, round_id, agents, field="coding_output"):
+    # merge all agents results for one transcript (all chunks) one round
     merged_items = []
 
     for agent in agents:
@@ -64,8 +76,8 @@ def merge_agents_one_transcript_round(base_path, transcript_id, round_id, agents
 
     return merged_items
 
-# run all transcripts
 def run_merge_all(base_path, output_base, transcript_ids, rounds, agents, field="coding_output"):
+    # run all transcripts
     os.makedirs(output_base, exist_ok=True)
     output_paths = []
 
@@ -333,7 +345,7 @@ def run_build_clue_pools_containment(input_dir, output_dir):
 
     return output_paths
     
-# overalp
+# overlap
 def similar_enough(a, b, threshold=0.80, min_chars=200):
     A = norm_for_dedup(a)
     B = norm_for_dedup(b)
