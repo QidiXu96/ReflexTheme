@@ -6,6 +6,8 @@ We developed Reflexive Thematic Agents (ReflexTheme) to support RTA with LLMs. R
 ## **API Requirement** 
 Users must provide their own API credentials to run ReflexTheme. 
 
-## **Coding**
-Related ReflexTheme coding functions at [ReflexTheme_Utils](./ReflexTheme_Utils/). <br>
-Apply ReflexTheme into covid example transcripts at [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/).
+## **Usage**
+1. Clone or download this repository. Related ReflexTheme coding functions at [ReflexTheme_Utils](./ReflexTheme_Utils/). <br>
+2. Prepare your own API credentials.
+3. Open [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/).
+4. Follow the notebook to configure the API, load transcripts, and run ReflexTheme.
