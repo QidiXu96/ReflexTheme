@@ -13,7 +13,7 @@ Use this file when:
 
 all chunks coded → one *_final.json per agent/transcript/round → compare four agents’ final coding outputs → update each agent’s reflexive thinking → save a versioned updated reflection
 """
-REFLECTION_OUTPUT_BASE_DIR = ("/ReflexTheme/updated_reflections")
+REFLECTION_OUTPUT_BASE_DIR = ("ReflexTheme in Covid/updated_reflections")
 
 def agent_self_reflection_update(fixed_profile, my_codes, peer_codes, current_reflection):
    if isinstance(current_reflection, dict):
