@@ -1,3 +1,14 @@
+"""
+Purpose:
+    Generate themes from the finalized codebook in Stage 2 of ReflexTheme.
+
+Use this file when:
+    - Clustering codebook entries before theme generation
+    - Running multiple themer agents with different perspectives
+    - Checking whether all initial codes are assigned to themes
+    - Repairing missing code assignments
+"""
+
 import json, re, os, glob, time
 import numpy as np
 import pandas as pd
