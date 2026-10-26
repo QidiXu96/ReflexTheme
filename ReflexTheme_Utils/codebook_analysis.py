@@ -5,7 +5,7 @@ import copy
 import re
 import matplotlib.pyplot as plt
 
-BASE_DIR = "/ReflexTheme"
+BASE_DIR = "ReflexTheme in Covid"
 
 OPTION_DIRS = {
     3: os.path.join(BASE_DIR, "option_3_code_clue_threshold")
