@@ -8,9 +8,9 @@ Users must provide their own API credentials to run ReflexTheme.
 
 ## **Usage**
 1. Clone or download this repository. Related ReflexTheme coding functions at [ReflexTheme_Utils](./ReflexTheme_Utils/). <br>
-2. Prepare your own API credentials.
-3. Open [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/).
-4. Follow the notebook to configure the API, load transcripts, and run ReflexTheme.
+2. Prepare your own API credentials and set your azure deployment name at [AzureUtils.py](./ReflexTheme_Utils/AzureUtils.py). <br>
+3. Open [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/). <br>
+4. Follow the notebook to configure the API, load transcripts, and run ReflexTheme. <br>
 
 ## **Quick Start**
 ```bash
