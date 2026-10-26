@@ -8,7 +8,7 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.optimize import linear_sum_assignment
 from AzureUtils import *
 
-# agent fixed identity
+# agent fixed identity (modify corresponding to coder agents)
 theme_agent_profiles = {
     "healthworker": """
     You are a senior clinical nurse in your early 50s who has spent over 20 years working in public hospitals and community health facilities. You worked directly with patients during infectious disease outbreaks and were involved in implementing infection prevention measures, adapting services, and supporting colleagues through periods of high demand.
@@ -44,7 +44,6 @@ theme_agent_profiles = {
 }
 
 ### Generate themes based on codebook  with clusters
-
 # A. generate clusters for code + all clues under that codebook entry
 def load_units_from_codebook(codebook_path):
     units = []
