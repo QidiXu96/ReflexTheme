@@ -11,3 +11,11 @@ Users must provide their own API credentials to run ReflexTheme.
 2. Prepare your own API credentials.
 3. Open [ReflexTheme_Covid.ipynb](./ReflexTheme_Covid.ipynb/).
 4. Follow the notebook to configure the API, load transcripts, and run ReflexTheme.
+
+## **Quick Start**
+```bash
+git clone https://github.com/QidiXu96/ReflexTheme.git
+cd ReflexTheme
+pip install -r requirements.txt
+```
+Then open `ReflexTheme_Covid.ipynb`, provide your own API credentials, and run the notebook cells in order.
