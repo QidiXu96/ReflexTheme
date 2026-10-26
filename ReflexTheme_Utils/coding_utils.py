@@ -16,6 +16,7 @@ def _chunk_sort_key(filename):
     return int(m.group(1)) if m else 10**9
 
 def format_coding_output(obj):
+    # converts coding results into consistent Initial Code/ Clues text.
     if obj is None:
         return ""
 
@@ -36,6 +37,7 @@ def format_coding_output(obj):
     return ""
 
 def merge_agent_results(agent_name, transcript_id, round_num, base_dir, suffix="_final"):
+    # merges all cleaned chunk outputs for one agent into one final transcript-level JSON.
     agent_dir = os.path.join(base_dir, agent_name)
     prefix = f"round_{round_num}_{transcript_id}_chunk_"
 
@@ -65,7 +67,7 @@ def merge_agent_results(agent_name, transcript_id, round_num, base_dir, suffix="
 
     merged_json_text = "\n\n".join(merged_json_parts)
 
-    final_base_dir = ("/ReflexTheme/final_coding")
+    final_base_dir = ("ReflexTheme in Covid/final_coding")
     final_agent_dir = os.path.join(final_base_dir, agent_name)
     os.makedirs(final_agent_dir, exist_ok=True)
 
@@ -85,6 +87,7 @@ def merge_agent_results(agent_name, transcript_id, round_num, base_dir, suffix="
 
 # clean json text
 def clean_json_text(s):
+    # remove Markdown-like formatting artifacts
     if not isinstance(s, str):
         return s
 
@@ -114,6 +117,7 @@ def clean_json(obj):
     return obj
 
 def process_multiple_json_files(file_paths, suffix="_clean"):
+    # applies that cleaning to multiple JSON files and save _clean.json versions.
     output_paths = []
     for file_path in file_paths:
         try:
