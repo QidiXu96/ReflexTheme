@@ -2,10 +2,16 @@ import os, json, re, time
 from AzureUtils import get_completion
 
 """
-all chunks coded → one *_final.json per agent/transcript/round
-→ compare four agents’ final coding outputs
-→ update each agent’s reflexive thinking
-→ save a versioned updated reflection
+Purpose:
+    Update each coder agent's reflexive thinking after comparing its coding results with peer coder outputs.
+
+Use this file when:
+    - Comparing coding results across coder agents
+    - Generating updated assumptions and further considerations
+    - Recording reflexive history between coding rounds
+    - Loading the latest reflection for the next coding round
+
+all chunks coded → one *_final.json per agent/transcript/round → compare four agents’ final coding outputs → update each agent’s reflexive thinking → save a versioned updated reflection
 """
 REFLECTION_OUTPUT_BASE_DIR = ("/ReflexTheme/updated_reflections")
 
