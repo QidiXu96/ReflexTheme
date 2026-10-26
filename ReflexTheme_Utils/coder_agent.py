@@ -1,10 +1,17 @@
 """
-Generic ReflexCoTI coder agent utilities.
+Purpose:
+    Define and run the reflexive coder agents used in Stage 1 of ReflexTheme.
 
+Use this file when:
+    - Generating initial codes and supporting clues from transcript (research question and interviewee should be modified based on your own research)
+    - Running different coder identities (coder agents identify should be modified based on your own research)
+    - Performing multiple rounds of coding with reflection and coding memory
+    - Saving independent coding results
+
+Generic ReflexCoTI coder agent utilities.
 Each coder is supplied as a structured profile.
 The profile has three layers:
-
-1. identity_core (fixed):
+1. identity_core (fixed, but should be fitted to your research):
    - role
    - positional statement
    - synthetic biography
