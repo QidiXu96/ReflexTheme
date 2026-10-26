@@ -1,7 +1,13 @@
 """
-Module: AzureUtils.py
-Description: Contains utility functions for interacting with the Azure OpenAI API and documents
+Purpose:
+    Utility functions for Azure OpenAI API access and DOCX text loading.
+
+Use this file when:
+    - Initializing the Azure OpenAI client
+    - Sending prompts to an Azure OpenAI model
+    - Reading transcript text from DOCX files
 """
+
 from openai import AzureOpenAI
 from docx import Document
 
@@ -14,7 +20,7 @@ def init_client(azure_endpoint, api_key, api_version):
         api_version=api_version
     )
 
-def get_completion(messages, model="gpt-4o-mini-Qidi", max_tokens=16384, temperature=0.7, top_p=1, frequency_penalty=0, presence_penalty=0):
+def get_completion(messages, model="your_azure_deployment_name", max_tokens=16384, temperature=0.7, top_p=1, frequency_penalty=0, presence_penalty=0):
     if _client is None:
         raise Exception("AzureOpenAI client not initialized. Please call init_client() with your parameters first.")
     response = _client.chat.completions.create(
