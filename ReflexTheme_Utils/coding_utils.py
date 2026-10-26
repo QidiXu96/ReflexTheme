@@ -1,3 +1,14 @@
+"""
+Purpose:
+    Clean and merge chunk-level coding outputs produced by coder agents.
+
+Use this file when:
+    - Cleaning coding JSON outputs
+    - Formatting code/clue results
+    - Merging all transcript chunks for one coder agent
+    - Creating one final coding result per transcript and coding round
+"""
+
 import json, re, os
 
 def _chunk_sort_key(filename):
@@ -36,7 +47,7 @@ def merge_agent_results(agent_name, transcript_id, round_num, base_dir, suffix="
     json_files.sort(key=_chunk_sort_key)
 
     if not json_files:
-        raise FileNotFoundError(f"No cleanchunk JSONs found for agent={agent_name}, transcript={transcript_id}")
+        raise FileNotFoundError(f"No clean chunk JSONs found for agent={agent_name}, transcript={transcript_id}")
 
     merged_json_parts = []
     reflection_to_save = None
