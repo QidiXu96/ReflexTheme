@@ -1,3 +1,14 @@
+"""
+Purpose:
+    Build consensus themes from multiple themer-agent outputs.
+
+Use this file when:
+    - Creating consensus code groups across multiple themer agents
+    - Selecting final themes based on code fit and theme distinctiveness
+    - Producing the final consensus theme set
+    - Evaluating theme similarity, distinctiveness, and coherence
+"""
+
 import json, re, os, glob, time
 import numpy as np
 import pandas as pd
