@@ -1,3 +1,20 @@
+"""
+Purpose:
+    Run the complete Stage 1 ReflexTheme coding workflow across multiple transcripts and iterative coding rounds.
+
+Use this file when:
+    - Running the full Stage 1 pipeline
+    - Performing multi-agent transcript coding
+    - Running iterative coding with coding memory and collaborative reflection
+    - Applying clue deduplication and novelty-based stopping
+    - Selecting final codes and updating the evolving codebook
+
+Main entry point:
+    run_multi_transcript_dynamic_rounds()
+
+This file orchestrates functions from coder_agent.py, coder_collaboration_reflection.py, coding_utils.py, and dedup.py.
+"""
+
 import os, re, glob, json, time, copy
 import pandas as pd
 import numpy as np
@@ -341,7 +358,7 @@ def choose_one_code_per_clue(input_path, output_path, model, sim_threshold=0.80)
         unique_norms = list(freq.keys()) # normalized code names
 
         if len(unique_norms) == 1:
-            final = min(norm_map[unique_norms[0]], key=len)
+            final = max(norm_map[unique_norms[0]], key=len)
             compact["clue_pool"].append({
                 "clue_id": clue.get("clue_id"),
                 "text": clue.get("text", ""),
@@ -349,7 +366,7 @@ def choose_one_code_per_clue(input_path, output_path, model, sim_threshold=0.80)
             })
             continue
 
-        rep_texts = [min(norm_map[n], key=len) for n in unique_norms] # one representative code name (shortest, since some original code name has more space) per unique concept
+        rep_texts = [max(norm_map[n], key=len) for n in unique_norms] # one representative code name per unique concept
         embeddings = get_embeddings_sentence_transformers(rep_texts, model) # (N, D)
 
         sim_matrix = cosine_similarity(embeddings) # (N, N)
@@ -384,7 +401,7 @@ def choose_one_code_per_clue(input_path, output_path, model, sim_threshold=0.80)
         for i in best_cluster:
             candidates.extend(norm_map[unique_norms[i]])
 
-        final = min(candidates, key=len)
+        final = max(candidates, key=len)
 
         compact["clue_pool"].append({
             "clue_id": clue.get("clue_id"),
