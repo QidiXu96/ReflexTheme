@@ -8,7 +8,6 @@ Use this file when:
     - Performing multiple rounds of coding with reflection and coding memory
     - Saving independent coding results
 
-Generic ReflexCoTI coder agent utilities.
 Each coder is supplied as a structured profile.
 The profile has three layers:
 1. identity_core (fixed, but should be fitted to your research):
@@ -31,8 +30,8 @@ import json, os, re, time
 from AzureUtils import *
 
 DEFAULT_OUTPUT_BASE_DIR = "/ReflexTheme/independent_coding"
-DEFAULT_RESEARCH_QUESTION = "how the pandemic affected service delivery, health workers, patient access to services, leadership, and governance, and what extent the legacy of the 2013–16 Ebola outbreak influenced the COVID-19 response and public perception"
-DEFAULT_INTERVIEWEE = "health workers, policymakers, and patients between Oct-Dec 2020"
+DEFAULT_RESEARCH_QUESTION = "how the pandemic affected service delivery, health workers, patient access to services, leadership, and governance, and what extent the legacy of the 2013–16 Ebola outbreak influenced the COVID-19 response and public perception" # can be changed based on research
+DEFAULT_INTERVIEWEE = "health workers, policymakers, and patients between Oct-Dec 2020" # can be changed based on research
 
 def coder_agent(
     transcript,
@@ -195,7 +194,7 @@ def healthworker_coder(
     You value patient care, staff safety, and maintaining healthcare services during crises.
     You are especially attentive to workload pressures, staffing challenges, infection risks, disruptions to care delivery, and practical adaptations made by health workers.
     You may underestimate broader political, governance, or societal influences that shape healthcare experiences.
-    """.strip()
+    """.strip()  # can be changed based on research
 
     return coder_agent(
         transcript=transcript,
@@ -215,7 +214,7 @@ def policy_maker_coder(
     You value effective leadership, health system resilience, preparedness, and evidence-informed decision making.
     You are especially attentive to governance structures, policy implementation, resource allocation, institutional coordination, and lessons learned from previous outbreaks such as Ebola.
     You may underestimate the everyday realities and emotional experiences of patients and frontline health workers. 
-    """.strip()
+    """.strip()  # can be changed based on research
 
     return coder_agent(
         transcript=transcript,
@@ -236,7 +235,7 @@ def patient_coder(
     You value accessible healthcare, trust, clear communication, and respectful treatment.
     You are especially attentive to barriers to care, experiences of healthcare services, public perceptions, trust in institutions, fear, uncertainty, and community responses to disease outbreaks.
     You may underestimate organizational, policy, or resource constraints faced by health systems.    
-    """.strip()
+    """.strip()  # can be changed based on research
 
     return coder_agent(
         transcript=transcript,
@@ -256,7 +255,7 @@ def qualitative_researcher_coder(
     You value reflexivity and interpretive transparency.
     You are especially attentive to interpretive transparency and reflexivity.
     You may underestimate operational healthcare challenges or policy constraints that are not explicitly discussed in the transcript.
-    """.strip()
+    """.strip()  # can be changed based on research
 
     return coder_agent(
         transcript=transcript,
