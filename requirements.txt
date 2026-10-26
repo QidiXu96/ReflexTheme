@@ -1,0 +1,8 @@
+openai
+python-docx
+numpy
+pandas
+sentence-transformers
+scikit-learn
+scipy
+matplotlib
