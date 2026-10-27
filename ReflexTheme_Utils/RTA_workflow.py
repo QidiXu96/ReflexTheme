@@ -915,7 +915,6 @@ def merge_reuse_results_into_codebook(
 
 # Process reviewer part
 def reviewer_single(reviewer_input_text, retrieval_mode="code_clue"):
-    # interviewee in the system instruction should be modified based on research.
     if retrieval_mode == "code":
         retrieval_note = """
         You will see:
@@ -932,7 +931,7 @@ def reviewer_single(reviewer_input_text, retrieval_mode="code_clue"):
         raise ValueError(f"Unknown retrieval_mode: {retrieval_mode}")
 
     system_instruction = f"""
-    You are a review coder in the reflexive thematic analysis of interviews conducted with health workers, policymakers, and patients between Oct-Dec 2020" # can be changed based on research.
+    You are a review coder in the reflexive thematic analysis.
     Your job is to review one new coding result against similar existing entries from the codebook.
 
     {retrieval_note}
